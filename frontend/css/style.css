@@ -22,8 +22,12 @@
 html{
   font-size: 62.5%;
   overflow-x: hidden;
+  width: 100vw;
   scroll-padding-top: 6rem;
   scroll-behavior: smooth;
+}
+body{
+  overflow-x: hidden;
 }
 
 section{
@@ -65,7 +69,11 @@ section{
 
 header{
   position: fixed;
-  top:0; left: 0; right:0;
+  min-width: 100vw;
+  max-width: 100vw;
+  top:0; 
+  left: 0;
+  right:0;
   background:#333;
   z-index: 1000;
   display: flex;
@@ -222,6 +230,16 @@ header .search-bar-container label:hover{
   font-size: 5rem;
   color:#fff;
   cursor: pointer;
+}
+
+.login-form-container .change-link{
+  color: blue;
+  cursor: pointer;
+}
+
+.login-form-container .change-link:hover{
+  color: black;
+  text-decoration: underline;
 }
 
 #menu-bar{
@@ -609,20 +627,9 @@ header .search-bar-container label:hover{
   color:var(--orange);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.none{
+  display: none;
+}
 
 /* media queries  */
 
