@@ -150,9 +150,10 @@ header .search-bar-container label:hover{
   color:var(--orange);
 }
 
-.login-form-container{
+.float-form-container{
   position: fixed;
-  top:-120%; left: 0;
+  top:-120%;
+  left: 0;
   z-index: 10000;
   min-height: 100vh;
   width:100%;
@@ -162,11 +163,11 @@ header .search-bar-container label:hover{
   justify-content: center;
 }
 
-.login-form-container.active{
+.float-form-container.active{
   top:0;
 }
 
-.login-form-container form{
+.float-form-container form{
   margin:2rem;
   padding:1.5rem 2rem;
   border-radius: .5rem;
@@ -174,7 +175,7 @@ header .search-bar-container label:hover{
   width:50rem;
 }
 
-.login-form-container form h3{
+.float-form-container form h3{
   font-size: 3rem;
   color:#444;
   text-transform: uppercase;
@@ -182,7 +183,7 @@ header .search-bar-container label:hover{
   padding:1rem 0;
 }
 
-.login-form-container form .box{
+.float-form-container form .box{
   width:100%;
   padding:1rem;
   font-size: 1.7rem;
@@ -192,39 +193,39 @@ header .search-bar-container label:hover{
   text-transform: none;
 }
 
-.login-form-container form .box:focus{
+.float-form-container form .box:focus{
   border-color: var(--orange);;
 }
 
-.login-form-container form #remember{
+.float-form-container form #remember{
   margin:2rem 0;
 }
 
-.login-form-container form label{
+.float-form-container form label{
   font-size: 1.5rem;
 }
 
-.login-form-container form .btn{
+.float-form-container form .btn{
   display: block;
   width:100%;
 }
 
-.login-form-container form p{
+.float-form-container form p{
   padding:.5rem 0;
   font-size: 1.5rem;
   color:#666;
 }
 
-.login-form-container form p a{
+.float-form-container form p a{
   color:var(--orange);
 }
 
-.login-form-container form p a:hover{
+.float-form-container form p a:hover{
   color:#333;
   text-decoration: underline;
 }
 
-.login-form-container #form-close{
+.float-form-container #form-close{
   position: absolute;
   top:2rem; right:3rem;
   font-size: 5rem;
@@ -232,12 +233,12 @@ header .search-bar-container label:hover{
   cursor: pointer;
 }
 
-.login-form-container .change-link{
+.float-form-container .change-link{
   color: blue;
   cursor: pointer;
 }
 
-.login-form-container .change-link:hover{
+.float-form-container .change-link:hover{
   color: black;
   text-decoration: underline;
 }

@@ -50,9 +50,9 @@
 
 <!-- login form container  -->
 
-<div class="login-form-container">
+<div class="login-form-container float-form-container">
 
-    <i class="fas fa-times" id="form-close"></i>
+    <i class="fas fa-times" id="form-close" data-index="0"></i>
 
     <form action="" class="login">
         <h3>login</h3>
@@ -152,6 +152,22 @@
 
 <!-- book section ends -->
 
+<!-- package book form-->
+
+<div class="book-form-container float-form-container">
+    <i class="fas fa-times" id="form-close" data-index="1"></i>
+
+    <form action="" class="book-package">
+        <h3>Book Your Package</h3>
+        <input type="text" class="box" placeholder="enter your name">
+        <input type="number" class="box" placeholder="enter your mobile">
+        <input type="email" class="box" placeholder="enter your email">
+        <input type="text" readonly class="box pkg-name" >
+        <input type="number" readonly class="box pkg-price" >
+        <input type="submit" value="Book now" class="btn">
+    </form>
+</div>
+
 <!-- packages section starts  -->
 
 <section class="packages" id="packages">
@@ -169,24 +185,24 @@
 
     <div class="box-container">
 
-        <div class="box">
+        <div class="box package">
             <img src="images/p-1.jpg" alt="">
             <div class="content">
                 <h3> <i class="fas fa-map-marker-alt"></i> mumbai </h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, nam!</p>
-                <div class="stars">
+                <div class="stars none">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="far fa-star"></i>
                 </div>
-                <div class="price"> $90.00 <span>$120.00</span> </div>
-                <a href="#" class="btn">book now</a>
+                <div class="price"> $90.00 </div>
+                <span class="btn book-btn" data-id="1" data-name="Mumbai" data-price="30000">book now</span>
             </div>
         </div>
 
-        <div class="box">
+        <div class="box package">
             <img src="images/p-2.jpg" alt="">
             <div class="content">
                 <h3> <i class="fas fa-map-marker-alt"></i> hawaii </h3>
@@ -199,11 +215,11 @@
                     <i class="far fa-star"></i>
                 </div>
                 <div class="price"> $90.00 <span>$120.00</span> </div>
-                <a href="#" class="btn">book now</a>
+                <span class="btn book-btn" data-id="1" data-name="Mumbai" data-price="30000">book now</span>
             </div>
         </div>
 
-        <div class="box">
+        <div class="box package">
             <img src="images/p-3.jpg" alt="">
             <div class="content">
                 <h3> <i class="fas fa-map-marker-alt"></i> sydney </h3>
@@ -216,11 +232,11 @@
                     <i class="far fa-star"></i>
                 </div>
                 <div class="price"> $90.00 <span>$120.00</span> </div>
-                <a href="#" class="btn">book now</a>
+                <span class="btn book-btn" data-id="1" data-name="Mumbai" data-price="30000">book now</span>
             </div>
         </div>
 
-        <div class="box">
+        <div class="box package">
             <img src="images/p-4.jpg" alt="">
             <div class="content">
                 <h3> <i class="fas fa-map-marker-alt"></i> paris </h3>
@@ -233,11 +249,11 @@
                     <i class="far fa-star"></i>
                 </div>
                 <div class="price"> $90.00 <span>$120.00</span> </div>
-                <a href="#" class="btn">book now</a>
+                <span class="btn book-btn" data-id="1" data-name="Mumbai" data-price="30000">book now</span>
             </div>
         </div>
 
-        <div class="box">
+        <div class="box package">
             <img src="images/p-5.jpg" alt="">
             <div class="content">
                 <h3> <i class="fas fa-map-marker-alt"></i> tokyo </h3>
@@ -250,11 +266,11 @@
                     <i class="far fa-star"></i>
                 </div>
                 <div class="price"> $90.00 <span>$120.00</span> </div>
-                <a href="#" class="btn">book now</a>
+                <span class="btn book-btn" data-id="5" data-name="Tokyo" data-price="30000">book now</span>
             </div>
         </div>
 
-        <div class="box">
+        <div class="box package">
             <img src="images/p-6.jpg" alt="">
             <div class="content">
                 <h3> <i class="fas fa-map-marker-alt"></i> eypt </h3>
@@ -267,7 +283,7 @@
                     <i class="far fa-star"></i>
                 </div>
                 <div class="price"> $90.00 <span>$120.00</span> </div>
-                <a href="#" class="btn">book now</a>
+                <span class="btn book-btn" data-id="6" data-name="Egypt" data-price="30000">book now</span>
             </div>
         </div>
 
