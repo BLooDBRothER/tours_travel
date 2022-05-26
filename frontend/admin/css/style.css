@@ -1,0 +1,187 @@
+:root {
+  --orange: #ffa500;
+  --gray: #333;
+}
+
+* {
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s linear;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.btn {
+  margin-top: 1rem;
+  background: var(--orange);
+  color: #fff;
+  padding: 0.8rem 3rem;
+  border: 0.2rem solid var(--orange);
+  cursor: pointer;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.btn:hover {
+  background: rgba(255, 165, 0, 0.2);
+  color: var(--orange);
+}
+
+/* header */
+
+header {
+  padding: 1rem;
+  width: 200px;
+  height: 100vh;
+  font-size: 1.2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--gray);
+  color: white;
+}
+
+header h2 {
+  margin: 2rem 0;
+}
+
+header h2 span {
+  color: var(--orange);
+}
+
+.links .link {
+  cursor: pointer;
+  padding: 1rem 0;
+}
+
+.links .link:hover {
+  color: var(--orange);
+}
+
+.links .link.selected {
+  color: var(--orange);
+  text-decoration: underline;
+}
+
+/* section common */
+
+.section {
+  width: calc(100vw - 200px);
+  min-height: 100vh;
+  padding: 2rem;
+  margin-left: 200px;
+  /* background-color: var(--orange); */
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Add Package */
+
+.add-pkg {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.add-pkg > * {
+  margin: 1rem 0;
+}
+
+.add-pkg .add-pkg-input {
+  font-size: 1.3rem;
+  padding: 1rem;
+  border: 1px solid rgba(51, 51, 51, 0.397);
+}
+
+/* List package */
+
+.package-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.package-container .package {
+  width: 20rem;
+  /* flex:1 1 30rem; */
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.package-container .package img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.package-container .package .content{
+    padding-left: 1rem;
+    padding-bottom: 2rem;
+}
+
+.package-container .package .content > *{
+    margin: 1.4rem 0;
+}
+
+.package-container .package .book-btn{
+    font-size: 1.2rem;
+    padding: .5rem 1rem;
+}
+
+.package-container .package .content i{
+    color: var(--orange);
+}
+
+/* Package Bookings */
+
+.bookings-container{
+    display: flex;
+    gap: 1rem;
+}
+
+.booking{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.booking > *{
+    margin: 1rem;
+}
+
+
+.booking span{
+    margin-left: 1rem;
+}
+
+.booking .user-detail > div, .booking .pkg-detail > div{
+    display: flex;
+    width: 100%;
+    margin: .5rem 0 ;
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+}
+
+.booking .approve-btn{
+    font-size: 1.3rem;
+    padding: .3rem 1rem;
+}
+
+.none {
+  display: none;
+}
