@@ -20,14 +20,14 @@
     
         <h2 class="logo"><span>T</span>ravel</h2>
         <nav class="links">
-            <div class="link selected">Add Package</div>
-            <div class="link">List Package</div>
-            <div class="link">Package Bookings</div>
-            <div class="link">Messages</div>
+            <div class="link selected" data-index="0">Add Package</div>
+            <div class="link" data-index="1">List Package</div>
+            <div class="link" data-index="2">Package Bookings</div>
+            <div class="link" data-index="3">Messages</div>
         </nav>
     </header>
 
-    <section class="section add-pkg-container none">
+    <section class="section add-pkg-container active">
         <h2 class="section-title">Add Package</h2>
         <form action="" class="add-pkg">
             <input type="text" class="add-pkg-input add-pkg-name" placeholder="Enter package Name">
@@ -38,7 +38,7 @@
         </form>
     </section>
 
-    <section class="section list-pkg-container">
+    <section class="section list-pkg-container none">
         <h2 class="section-title">List Packages</h2>
         <div class="pkg-search">
             <div class="search-id search-cnt">
