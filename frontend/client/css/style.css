@@ -391,6 +391,9 @@ header .search-bar-container label:hover{
   font-size:1.7rem;
   color:#666;
   padding:1rem 0;
+  height: 120px;
+  overflow: auto;
+  margin-top: 1rem;
 }
 
 .packages .box-container .box .content .stars i{
