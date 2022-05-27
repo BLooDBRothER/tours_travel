@@ -227,9 +227,18 @@ header h2 span {
     /* justify-content: space-between; */
 }
 
-.booking .approve-btn{
+.booking .approve-btn, .booking .cancel-btn{
     font-size: 1.3rem;
     padding: .3rem 1rem;
+}
+
+.booking .cancel-btn{
+  background-color: red;
+  /* border: none; */
+}
+
+.booking .cancel-btn:hover{
+  background-color: white;
 }
 
 /* Message */
