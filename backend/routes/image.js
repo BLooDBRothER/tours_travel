@@ -21,7 +21,7 @@ const upload=multer({storage:storage});
 router.post("/", upload.single("image"), function (req, res) {
   res.json({
     "status":"Posted successfully",
-    image_url:`http://localhost:3000/photos/${req.file.filename}`
+    image_url:`${req.file.filename}`
   });
 });
 

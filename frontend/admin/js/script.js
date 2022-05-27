@@ -1,22 +1,45 @@
+// const api = import("./api");
+import {api} from "./api.js";
+
 const navLinks = document.querySelectorAll(".link");
 const section = document.querySelectorAll(".section");
+const form = document.querySelector(".add-pkg");
 
-navLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-        const active = document.querySelector(".section.active");
+form.addEventListener("submit",async (e) => {
+  e.preventDefault();
+  console.log("clicking submit butn");
+  const value = form.querySelector(".add-pkg-img");
+  const data = new FormData();
+  const pkgname=form.querySelector(".add-pkg-name").value;
+  const pkgprice=form.querySelector(".add-pkg-price").value;
+  const pkgdes=form.querySelector(".add-pkg-des").value;
+  data.append("image", value.files[0]);
+  const res=await api.post("http://localhost:3000/image",data);
+  let packageData ={};
+  packageData.imgurl=res.image_url;
+  packageData.name=pkgname;
+  packageData.price=pkgprice;
+  packageData.des=pkgdes;
+  await api.post_json("http://localhost:3000/package",JSON.stringify(packageData));
+  console.log("submitted");
+});
 
-        const selectedBtn = document.querySelector(".selected");
+navLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const active = document.querySelector(".section.active");
 
-        selectedBtn.classList.remove("selected");
-        e.target.classList.add("selected");
+    const selectedBtn = document.querySelector(".selected");
 
-        active.classList.add("none");
-        active.classList.remove("active");
+    selectedBtn.classList.remove("selected");
+    e.target.classList.add("selected");
+    
+    active.classList.add("none");
+    active.classList.remove("active");
 
-        section[+e.target.dataset.index].classList.add("active");
-        section[+e.target.dataset.index].classList.remove("none");
-    });
-})
+    section[+e.target.dataset.index].classList.add("active");
+    section[+e.target.dataset.index].classList.remove("none");
+  });
+});
 
 // function for message
 
