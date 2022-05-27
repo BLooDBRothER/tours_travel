@@ -92,6 +92,9 @@ header h2 span {
   flex-direction: column;
   width: 400px;
   margin: 0 auto;
+  border: 1px solid var(--orange);
+  padding: 1rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
 }
 
 .add-pkg > * {
@@ -227,6 +230,86 @@ header h2 span {
 .booking .approve-btn{
     font-size: 1.3rem;
     padding: .3rem 1rem;
+}
+
+/* Message */
+
+.messages{
+  display: grid;
+  grid-template-columns: 600px 1fr;
+  height: 85vh;
+  overflow: hidden;
+  /* transition: none; */
+}
+
+.message-lists{
+  border: 1px solid var(--gray);
+  padding: 1rem 0;
+  height: 100%;
+  overflow: auto;
+}
+
+.message-list{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem;
+  border: 1px solid var(--gray);
+  border-left: none;
+  border-right: none;
+  font-size: 1.3rem;
+  margin: .3rem 0;
+  transition: none;
+}
+
+.message-list > *{
+  transition: none;
+}
+
+.message-list .clear-msg{
+  color: red;
+}
+
+.message-list:hover{
+  background-color: var(--gray);
+  color: var(--orange); 
+}
+
+.message-list.selected{
+  background-color: var(--orange);
+  color: white;
+}
+
+.message-list p{
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message-content{
+  border: 1px solid var(--gray);
+  height: 100%;
+  /* overflow: hidden; */
+  overflow: auto;
+  padding: 1rem;
+}
+
+.message-content div{
+  margin: .5rem;
+  line-height: 1.7rem;
+}
+
+.message-content > div span:first-child{
+  font-weight: bold;
+}
+
+.message-content div:nth-child(3){
+  border-bottom: 1px solid var(--orange);
+}
+
+.message-content div:nth-child(4){
+  margin-top: 2rem;
 }
 
 .none {
