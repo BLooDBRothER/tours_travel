@@ -3,6 +3,7 @@ const path = require("path");
 const app = express();
 const router = express.Router();
 const multer=require('multer');
+const fs=require('fs');
 
 //uploadLogic
 const storage=multer.diskStorage({
@@ -23,6 +24,22 @@ router.post("/", upload.single("image"), function (req, res) {
     "status":"Posted successfully",
     image_url:`${req.file.filename}`
   });
+});
+
+router.delete("/:filename",function(req,res){
+  console.log("Delete request");
+  const filepath=path.join(__dirname,`../../uploads/${req.params.filename}`);
+  try{
+    fs.unlinkSync(filepath);
+    res.status(200).json({
+      message:"Success Buddy"
+    })
+  } catch(err){
+    res.status(404).json({
+      message:"Sorry file not found"
+    })
+    console.log(err);
+  }
 });
 
 
