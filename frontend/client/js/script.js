@@ -7,7 +7,10 @@ const menu = document.querySelector('#menu-bar');
 const navbar = document.querySelector('.navbar');
 const imgBtn = document.querySelectorAll('.img-btn');
 const formChangeBtn = document.querySelectorAll(".change-link");
-const bookPackageBtn = document.querySelectorAll(".book-btn")
+const bookPackageBtn = document.querySelectorAll(".book-btn");
+const bookingsOpen = document.querySelector(".your-bookings-link");
+const bookingsClose = document.querySelector("#your-bookings-close");
+const yourBookings =document.querySelector(".your-bookings");
 
 window.onscroll = () => {
   searchBtn.classList.remove('fa-times');
@@ -67,8 +70,19 @@ bookPackageBtn.forEach(bookBtn => {
 function updateBookForm(packageData) {
   floatForm[1].querySelector(".pkg-name").value = packageData.name;
   floatForm[1].querySelector(".pkg-price").value = packageData.price;
-  floatForm[1].querySelector(".btn").dataset.id = packageData.id;
+  floatForm[1].querySelector(".btn").dataset.id = packageData.pkgid;
 }
+
+// your bookings
+
+bookingsOpen.addEventListener("click", (e) => {
+  e.preventDefault();
+  yourBookings.classList.remove("none");
+});
+
+bookingsClose.addEventListener("click", (e) => {
+  yourBookings.classList.add("none");
+});
 
 // Swiper function
 var swiper = new Swiper(".review-slider", {
