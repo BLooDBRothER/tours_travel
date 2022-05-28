@@ -1,4 +1,3 @@
-// const api = import("./api");
 import {api} from "./api.js";
 
 const navLinks = document.querySelectorAll(".link");

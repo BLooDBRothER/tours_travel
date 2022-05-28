@@ -1,6 +1,8 @@
 function apiFunction() {
-  const get = async (url) => {
-    const res = await fetch(url, {
+  const url = "http://localhost:3000/"
+  const get = async (path) => {
+    const fetchUrl = `${url}${path}`;
+    const res = await fetch(fetchUrl, {
       method: "GET",
       mode: "cors",
     });
@@ -8,9 +10,10 @@ function apiFunction() {
     return retData;
   };
 
-  const post_json = async (url, data) => {
-    console.log("Calling ")
-    const res = await fetch(url, {
+  const post_json = async (path, data) => {
+    const fetchUrl = `${url}${path}`;
+    // console.log("Calling ")
+    const res = await fetch(fetchUrl, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -18,19 +21,18 @@ function apiFunction() {
       },
       body: data,
     });
-    let retData = await res.json();
-    return retData;
+    return await res.json();
   };
 
-  const post = async (url, data) => {
+  const post = async (path, data) => {
+    const fetchUrl = `${url}${path}`;
     console.log("Calling post method");
-    const res = await fetch(url, {
+    const res = await fetch(fetchUrl, {
       method: "POST",
       mode: "cors",
       body: data,
     });
-    let retData = await res.json();
-    return retData;
+    return await res.json();
   };
 
   return { get, post_json, post };
