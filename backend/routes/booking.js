@@ -4,7 +4,8 @@ const router=express.Router();
 
 //getAll
 router.get("/",(req,res)=>{
-    db.query("SELECT * FROM BOOKING",(d)=>{
+    db.query("SELECT * FROM BOOKING INNER JOIN PACKAGE ON BOOKING.PACKAGEID = PACKAGE.ID INNER JOIN USER ON booking.USERID = USER.ID",(d)=>{
+        console.log(d.row)
         res.json(d.row)
     });
 })
@@ -35,6 +36,7 @@ router.get("/:id",(req,res)=>{
 */
 router.post("/",(req,res)=>{
     const data=req.body;
+    console.log(req);
     db.query(
         `INSERT INTO booking (userid,packageid,booking_date,departure_date,arrival_date,approved) values (${data.userid},${data.packageid},"${data.booking_date}","${data.departure_date}","${data.arrival_date}",${data.approved})`,
         (d) => {
