@@ -97,17 +97,51 @@ header h2 span {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
 }
 
-.add-pkg > * {
+.add-pkg > *, .update-pkg > * {
   margin: 1rem 0;
 }
 
-.add-pkg .add-pkg-input {
+.add-pkg .add-pkg-input, .update-pkg .update-pkg-input {
   font-size: 1.3rem;
   padding: 1rem;
   border: 1px solid rgba(51, 51, 51, 0.397);
 }
 
 /* List package */
+
+.float-form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(45, 45, 45, 0.8);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  color: white;
+}
+
+.float-form .close-form{
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 2rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.float-form .update-pkg{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--orange);
+  padding: 1rem;
+}
 
 .package-container {
   display: flex;
@@ -160,6 +194,11 @@ header h2 span {
 .package-container .package .content{
     padding-left: 1rem;
     padding-bottom: 1rem;
+}
+
+.package-container .package .content p{
+  height: 120px;
+  overflow: auto;
 }
 
 .package-container .package .content > *{

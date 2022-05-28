@@ -409,11 +409,6 @@ header .search-bar-container label:hover{
   margin-top: 1rem;
 }
 
-.packages .box-container .box .content .stars i{
-  font-size:1.7rem;
-  color:var(--orange);
-}
-
 .packages .box-container .box .content .price{
   font-size: 2rem;
   color:#333;

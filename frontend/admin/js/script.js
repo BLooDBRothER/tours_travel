@@ -13,7 +13,9 @@ const endpointPath = {
   pkg_post: "package",
   pkg_get: "package",
   pkg_name_get: (pkgName) => `package/name/${pkgName}`,
+  pkg_add: "package",
   pkg_id_get: (pkgId) => `package/${pkgId}`,
+  pkg_update: (pkgId) => `package/${pkgId}`,
   pkg_delete: (pkgId) => `package/${pkgId}`,
 }
 
@@ -36,7 +38,7 @@ form.addEventListener("submit",async (e) => {
   packageData.price=pkgprice;
   packageData.des=pkgdes;
   
-  await api.post_json("package",JSON.stringify(packageData));
+  await api.post_json(endpointPath.pkg_add, JSON.stringify(packageData));
   console.log("submitted");
 });
 
@@ -76,10 +78,11 @@ async function updateListPackage(){
 const pkgTemplate = (data) => {
   const parent = document.createElement("div");
   parent.classList.add("package");
+  parent.dataset.id = data.id;
   parent.innerHTML =`<img src=${endpointPath.img_get(data.image)} alt="loacation">
                   <div class="content">
                       <h3> <i class="fas fa-map-marker-alt"></i> ${data.place} </h3>
-                      <p>${data.description}</p>
+                      <p class="pkg-des">${data.description}</p>
                       <div class="price"> Rs. ${data.price} </div>
                       <div class="edit-option" data-id=${data.id} data-name=${data.place} data-price=${data.price} data-img=${data.image}>
                           <span class="btn book-btn">Edit Package</span>
@@ -95,6 +98,7 @@ function DOMUpdateListPackage(jsonData){
     pkgContainer.appendChild(pkgTemplate(data));
     const lastElem = pkgContainer.lastChild;
     lastElem.querySelector(".delete").addEventListener("click", removePackage);
+    lastElem.querySelector(".book-btn").addEventListener("click", editPackage);
   });
 }
 
@@ -108,13 +112,14 @@ async function removePackage(e){
   updateListPackage();
 }
 
+// function to search pkg
+
 const searchBtn = document.querySelectorAll(".pkg-search-ic");
 
 searchBtn.forEach(btn => {
   btn.addEventListener("click", searchPkg);
 });
 
-// function to search pkg
 async function searchPkg(e){
   const type = e.target.dataset.type;
   const value = document.querySelector(`.search-box.${type}`).value;
@@ -129,6 +134,64 @@ async function searchPkg(e){
     return;
   }
   DOMUpdateListPackage(res);
+}
+
+// function to update pkg
+const updateFormCnt = document.querySelector(".float-form");
+const updateForm = document.querySelector(".update-pkg");
+const closeForm = document.querySelector(".close-form");
+const updateBtn = document.querySelector(".update-pkg-btn");
+
+closeForm.addEventListener("click", () => {
+  updateFormCnt.classList.add("none");
+  updateForm.reset();
+  updateForm.dataset.id="";  
+});
+
+function editPackage(e){
+  const pkgData = e.currentTarget.parentElement.dataset;
+  const update_img = document.querySelector(".update-pkg-img");
+
+  updateForm.dataset.id = pkgData.id;
+  updateForm.dataset.image  = pkgData.img;
+  updateForm.querySelector(".update-pkg-name").value = pkgData.name;
+  updateForm.querySelector(".update-pkg-price").value = pkgData.price;
+  updateForm.querySelector(".update-pkg-des").value = document.querySelector(`.package[data-id='${pkgData.id}'] .pkg-des`).innerText;
+
+  console.log(update_img.files.length);  
+
+  updateFormCnt.classList.remove("none");
+}
+
+updateForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+
+updateBtn.addEventListener("click", updatePkg);
+
+async function updatePkg(){
+  let packageData ={};
+  const id = updateForm.dataset.id;
+  packageData.name=updateForm.querySelector(".update-pkg-name").value;
+  packageData.price=updateForm.querySelector(".update-pkg-price").value;
+  packageData.des=updateForm.querySelector(".update-pkg-des").value;
+  const imgInput = document.querySelector(".update-pkg-img");
+  if(imgInput.files.length == 0){
+    packageData.imgurl = updateForm.dataset.image;
+  }
+  else{
+    const data = new FormData();
+    data.append("image", imgInput.files[0]);
+    const res=await api.post(endpointPath.img_post ,data);
+    packageData.imgurl=res.image_url;
+  }
+  
+  const status = await api.update(endpointPath.pkg_update(id), JSON.stringify(packageData));
+  if(status == 200){
+    await api.remove(endpointPath.img_delete(updateForm.dataset.image));
+  }
+  console.log(status);
+  updateListPackage();
 }
 
 // DOMfunction for message

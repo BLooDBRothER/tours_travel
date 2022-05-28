@@ -39,6 +39,19 @@ function apiFunction() {
     return await res.json();
   };
 
+  const update = async (path, data) => {
+    const fetchUrl = `${url}${path}`;
+    const res = await fetch(fetchUrl, {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    });
+    return res.status;
+  }
+
   const remove = async (path) => {
     const fetchUrl = `${url}${path}`;
     const res = await fetch(fetchUrl, {
@@ -48,7 +61,7 @@ function apiFunction() {
     return res.status == 200 ? true : false;
   }
 
-  return { get, post_json, post, remove };
+  return { get, post_json, post, remove, update };
 }
 
 export const api=apiFunction();

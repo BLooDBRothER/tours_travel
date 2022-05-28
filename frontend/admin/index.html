@@ -38,16 +38,29 @@
         </form>
     </section>
 
+    <div class="float-form none">
+        <i class="fas fa-times close-form"></i>
+        <h2 class="section-title">Update Package</h2>
+        <form action="" class="update-pkg">
+            <input type="text" class="update-pkg-input update-pkg-name" placeholder="Enter package Name">
+            <input type="text" class="update-pkg-input update-pkg-price" placeholder="Enter package Price">
+            <textarea name="description" placeholder="Enter package Description" class="update-pkg-input update-pkg-des" cols="30" rows="3"></textarea>
+            <input type="file" name="file" class="update-pkg-input update-pkg-img">
+            <p class="note">* Upload image to change the image</p>
+            <button class="update-pkg-btn btn">Update Package</button>
+        </form>
+    </div>
+
     <section class="section list-pkg-container none">
         <h2 class="section-title">List Packages</h2>
         <div class="pkg-search">
             <div class="search-id search-cnt">
-                <input type="text" class="search-box" placeholder="Search by ID">
-                <span for="search-bar" class="fas fa-search"></span>
+                <input type="number" class="search-box id" placeholder="Search by ID">
+                <span for="search-bar" class="fas fa-search pkg-search-ic" data-type="id"></span>
             </div>
             <div class="search-name search-cnt">
-                <input type="text" class="search-box" placeholder="Search by Name">
-                <span for="search-bar" class="fas fa-search search-ic"></span>
+                <input type="text" class="search-box name" placeholder="Search by Name">
+                <span for="search-bar" class="fas fa-search pkg-search-ic" data-type="name"></span>
             </div>
         </div>
         <div class="package-container">
