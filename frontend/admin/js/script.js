@@ -183,15 +183,14 @@ async function updatePkg(){
     const data = new FormData();
     data.append("image", imgInput.files[0]);
     const res=await api.post(endpointPath.img_post ,data);
+    await api.remove(endpointPath.img_delete(updateForm.dataset.image));
     packageData.imgurl=res.image_url;
   }
   
   const status = await api.update(endpointPath.pkg_update(id), JSON.stringify(packageData));
-  if(status == 200){
-    await api.remove(endpointPath.img_delete(updateForm.dataset.image));
-  }
   console.log(status);
   updateListPackage();
+  closeForm.click();
 }
 
 // DOMfunction for message
