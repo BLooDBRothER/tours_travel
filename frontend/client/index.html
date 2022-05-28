@@ -26,11 +26,9 @@
 
     <nav class="navbar">
         <a href="#home">home</a>
-        <!-- <a href="#book">book</a> -->
         <a href="#packages">packages</a>
         <a href="#services">services</a>
         <a href="#gallery">gallery</a>
-        <!-- <a href="#review">review</a> -->
         <a href="" class="your-bookings-link">Your Bookings</a>
         <a href="#contact">contact</a>
     </nav>
@@ -95,7 +93,6 @@
         <input type="password" class="box" placeholder="enter your password">
         <input type="password" class="box" placeholder="re-enter your password">
         <input type="submit" value="login now" class="btn">
-        <!-- <input type="checkbox" id="remember"> -->
         <p>Click here to <span class="change-link" data-value="sign-up">Login now</span></p>
     </form>
 
@@ -121,7 +118,6 @@
 
     <div class="image-container">
         <img src="asset/hill.jpg" alt="bg-img" id="video-slider">
-        <!-- <video src="images/vid-1.mp4"  loop autoplay muted></video> -->
     </div>
 
 </section>
@@ -135,15 +131,15 @@
 
     <form action="" class="book-package">
         <h3>Book Your Package</h3>
-        <input type="text" class="box" placeholder="enter your name">
-        <input type="number" class="box" placeholder="enter your mobile">
-        <input type="email" class="box" placeholder="enter your email">
-        <input type="text" readonly class="box pkg-name" >
-        <input type="number" readonly class="box pkg-price" >
+        <input type="text" class="box" name="name" placeholder="enter your name" readonly>
+        <input type="number" class="box " name="phone" placeholder="enter your mobile" readonly>
+        <input type="email" class="box" name="email" placeholder="enter your email" readonly>
+        <input type="text" readonly class="box pkg-name" name="pkgname" >
+        <input type="number" readonly class="box pkg-price">
         <label for="dep-date">Departure Date</label>
-        <input type="date" name="departure-date" id="dep-date" class="box pkg-dep" placeholder="departure Date">
+        <input type="date" name="departure-date" id="dep-date" class="box pkg-dep" placeholder="departure Date" required>
         <label for="arr-date">Arrival Date</label>
-        <input type="date" id="arr-date" name="arrival-date" class="box pkg-arr">
+        <input type="date" id="arr-date" name="arrival-date" class="box pkg-arr" required>
         <input type="submit" value="Book now" class="btn">
     </form>
 </div>

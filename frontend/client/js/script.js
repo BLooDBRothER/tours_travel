@@ -7,7 +7,6 @@ const menu = document.querySelector('#menu-bar');
 const navbar = document.querySelector('.navbar');
 const imgBtn = document.querySelectorAll('.img-btn');
 const formChangeBtn = document.querySelectorAll(".change-link");
-const bookPackageBtn = document.querySelectorAll(".book-btn");
 const bookingsOpen = document.querySelector(".your-bookings-link");
 const bookingsClose = document.querySelector("#your-bookings-close");
 const yourBookings =document.querySelector(".your-bookings");
@@ -60,30 +59,126 @@ formChangeBtn.forEach(elem => {
   });
 });
 
-bookPackageBtn.forEach(bookBtn => {
-  bookBtn.addEventListener("click", (e) => {
-    floatForm[1].classList.add("active");
-    updateBookForm(e.target.dataset);
-  });
-});
-
 function updateBookForm(packageData) {
+  floatForm[1].querySelector("form").dataset.id = packageData.pkgid;
   floatForm[1].querySelector(".pkg-name").value = packageData.name;
   floatForm[1].querySelector(".pkg-price").value = packageData.price;
-  floatForm[1].querySelector(".btn").dataset.id = packageData.pkgid;
 }
 
 // your bookings
+const url = "http://localhost:3000";
+const endpointPath = {
+  pkg_get: `${url}/package`,
+  booking_post: `${url}/booking`,
+  booking_get: `${url}/booking`
+}
 
 bookingsOpen.addEventListener("click", (e) => {
   e.preventDefault();
   yourBookings.classList.remove("none");
+  getYourBookings();
 });
 
-bookingsClose.addEventListener("click", (e) => {
+bookingsClose.addEventListener("click", () => {
   yourBookings.classList.add("none");
 });
 
+async function getYourBookings(){
+  const res = await fetch(endpointPath.booking_get);
+  const data = await res.json();
+  console.log(data);
+  updateYourBookings(data);
+}
+
+const bookingsTemplate = (data) => {
+  const parent = document.createElement("div");
+  parent.classList.add("booking-pkg");
+  parent.innerHTML = `<div class="pkg-name">${data.place}</div>
+                      <div class="dep-data">${data.departure_date}</div>
+                      <div class="arr-data">${data.arrival_date}</div>
+                      <div class="pkg-status">${data.approved == 1 ? "Approved" : (data.approved == 0 ? "Cancelled" : "Pending")}</div>
+                      <div class="pkg-cancel">Cancel</div>`
+  return parent;
+}
+
+const bookingCnt = document.querySelector(".bookings");
+
+function updateYourBookings(bookingData){
+  bookingCnt.innerHTML = `<div class="booking-pkg-title">
+                            <div class="title-name">Package Name</div>
+                            <div class="title-dep">Departure Date</div>
+                            <div class="title-arr">Arrival Date</div>
+                            <div class="title-status">Approval Status</div>
+                            <div class="title-cancel">Cancel Booking</div>
+                          </div>`
+  bookingData.forEach(data => {
+    bookingCnt.appendChild(bookingsTemplate(data));
+  });
+}
+
+// Update package list
+
+const packageTemplate = (id,name,price,des,imgurl) => {
+    const parent = document.createElement("div");
+    parent.className = "box package";
+    parent.innerHTML = `<img src="${url}/photos/${imgurl}" alt="">
+    <div class="content">
+        <h3> <i class="fas fa-map-marker-alt"></i> ${name} </h3>
+        <p>${des}</p>
+        <div class="price"> Rs.${price} </div>
+        <span class="btn book-btn" data-pkgid=${id} data-name=${name} data-price=${price}>book now</span>
+    </div>`
+    return parent;
+};
+
+async function getPackage(){
+    const data=await fetch(endpointPath.pkg_get,{
+      method:"GET"
+    });
+    let res = await data.json();
+    updatePackage(res);
+}
+
+function updatePackage(data){
+    console.log(data);
+    const container =  document.querySelector(".box-container")
+    container.innerHTML="";
+    data.forEach(d => {
+      container.appendChild(packageTemplate(d.id,d.place,d.price,d.description,d.image));
+      container.lastChild.querySelector(".book-btn").addEventListener("click", (e) => {
+        floatForm[1].classList.add("active");
+        updateBookForm(e.target.dataset);
+      })
+    });
+}
+
+// function to book package
+const bookForm = document.querySelector(".book-package");
+bookForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const bookingData = {}
+  bookingData.userid = 1;
+  bookingData.packageid = bookForm.dataset.id;
+  bookingData.booking_date = (new Date()).toDateString(); 
+  bookingData.departure_date =bookForm.querySelector(".pkg-dep").valueAsDate.toDateString();
+  bookingData.arrival_date =bookForm.querySelector(".pkg-arr").valueAsDate.toDateString();
+  bookingData.approved = 2;
+
+  const data = await fetch(endpointPath.booking_post,{
+    method:"POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bookingData)
+  });
+
+  console.log(data);
+});
+
+window.onload = () => {
+  getPackage();
+}
 // Swiper function
 var swiper = new Swiper(".review-slider", {
   spaceBetween: 20,

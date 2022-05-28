@@ -31,7 +31,7 @@ body{
 }
 
 section{
-  padding:2rem 9%;
+  padding:2rem 5%;
 }
 
 .heading{
@@ -371,11 +371,14 @@ header .search-bar-container label:hover{
 .packages .box-container{
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap:2rem;
 }
 
 .packages .box-container .box{
-  flex:1 1 30rem;
+  /* flex:1 1 30rem; */
+  width: 380px;
   border-radius: .5rem;
   overflow: hidden;
   box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
