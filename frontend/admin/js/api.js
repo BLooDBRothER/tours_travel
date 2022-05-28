@@ -6,6 +6,10 @@ function apiFunction() {
       method: "GET",
       mode: "cors",
     });
+    console.log(res);
+    if(res.status == 404){
+      return false;
+    }
     let retData = await res.json();
     return retData;
   };
@@ -35,7 +39,16 @@ function apiFunction() {
     return await res.json();
   };
 
-  return { get, post_json, post };
+  const remove = async (path) => {
+    const fetchUrl = `${url}${path}`;
+    const res = await fetch(fetchUrl, {
+      method: "DELETE",
+      mode: "cors"
+    });
+    return res.status == 200 ? true : false;
+  }
+
+  return { get, post_json, post, remove };
 }
 
 export const api=apiFunction();
