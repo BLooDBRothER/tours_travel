@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 //routes
-app.use('/photos',express.static(path.join(__dirname,"/../uploads")));
+app.use('/photos',express.static(path.join(__dirname,"./uploads")));
 app.use('/user',userRoutes);
 app.use('/package',packageRoutes);
 app.use('/image',imageRoutes);

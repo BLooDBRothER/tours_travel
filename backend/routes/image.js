@@ -28,15 +28,16 @@ router.post("/", upload.single("image"), function (req, res) {
 
 router.delete("/:filename",function(req,res){
   console.log("Delete request");
-  const filepath=path.join(__dirname,`../../uploads/${req.params.filename}`);
+  const filepath=path.join(__dirname,`../uploads/${req.params.filename}`);
+  console.log(filepath);
   try{
     fs.unlinkSync(filepath);
     res.status(200).json({
-      message:"Success Buddy"
+      message:"Success"
     })
   } catch(err){
     res.status(404).json({
-      message:"Sorry file not found"
+      message:"File not found"
     })
     console.log(err);
   }

@@ -26,7 +26,8 @@ router.get("/:id", (req, res) => {
 
 //getbyName {localhost:3000/package/name/pkgName}
 router.get("/name/:id", (req, res) => {
-  db.query(`SELECT * FROM PACKAGE WHERE place=${req.params.id}`, (d) => {
+  console.log(req.params.id);
+  db.query(`SELECT * FROM PACKAGE WHERE place='${req.params.id}'`, (d) => {
     if (d.row.length === 0) {
       console.log("Entering here");
       res.status(404).json([]);
