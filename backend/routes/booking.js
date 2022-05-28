@@ -23,25 +23,53 @@ router.get("/:id",(req,res)=>{
 })
 
 //createOne
+/*
+{
+    userid:int,
+    packageid:int,
+    booking_date:"varchar",
+    departure_date:"varchar",
+    arrival_date:"varchar",
+    approved:(1 or 0)
+}
+*/
 router.post("/",(req,res)=>{
-    console.log(req.body);
-    res.json({
-        type:`Posting done`
-    })
+    const data=req.body;
+    db.query(
+        `INSERT INTO booking (userid,packageid,booking_date,departure_date,arrival_date,approved) values (${data.userid},${data.packageid},"${data.booking_date}","${data.departure_date}","${data.arrival_date}",${data.approved})`,
+        (d) => {
+          console.log(d);
+          res.json(d);
+        }
+    );
 })
 
 //updateOne
+/*
+{
+    approved:(1 or 0)
+}
+*/
 router.patch("/:id",(req,res)=>{
-    res.json({
-        type:`Updating done`
-    })
-})
+    db.query(
+        `UPDATE booking SET approved=${req.body.approved}`,
+        (d)=>{
+            console.log(d);
+            res.json(d);
+        }
+    )
+});
 
 //deletingOne
+//localhost:3000/booking/2 with delete method in fetch
 router.delete("/:id",(req,res)=>{
-    res.json({
-        type:`Deleting done`
-    })
+    db.query(
+        `DELETE FROM BOOKING WHERE ID=${req.params.id}`,
+        (d) => {
+          console.log(d);
+          res.json(d);
+        }
+    );
 })
 
 module.exports=router;
