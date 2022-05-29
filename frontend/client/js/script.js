@@ -70,7 +70,9 @@ const url = "http://localhost:3000";
 const endpointPath = {
   pkg_get: `${url}/package`,
   booking_post: `${url}/booking`,
-  booking_get: `${url}/booking`
+  booking_id_get: (userid) => `${url}/booking/${userid}`,
+  booking_check: `${url}/booking/check`,
+  booking_delete: (id) => `${url}/booking/${id}`,
 }
 
 bookingsOpen.addEventListener("click", (e) => {
@@ -84,20 +86,21 @@ bookingsClose.addEventListener("click", () => {
 });
 
 async function getYourBookings(){
-  const res = await fetch(endpointPath.booking_get);
+  const res = await fetch(endpointPath.booking_id_get(1));
   const data = await res.json();
   console.log(data);
   updateYourBookings(data);
 }
 
 const bookingsTemplate = (data) => {
+  console.log(data);
   const parent = document.createElement("div");
   parent.classList.add("booking-pkg");
   parent.innerHTML = `<div class="pkg-name">${data.place}</div>
                       <div class="dep-data">${data.departure_date}</div>
                       <div class="arr-data">${data.arrival_date}</div>
                       <div class="pkg-status">${data.approved == 1 ? "Approved" : (data.approved == 0 ? "Cancelled" : "Pending")}</div>
-                      <div class="pkg-cancel">Cancel</div>`
+                      <div class="pkg-cancel ${data.approved == 2 ? "" : "no-event"}" data-bookingid=${data.bookingid}>Cancel</div>`
   return parent;
 }
 
@@ -113,7 +116,20 @@ function updateYourBookings(bookingData){
                           </div>`
   bookingData.forEach(data => {
     bookingCnt.appendChild(bookingsTemplate(data));
+    bookingCnt.lastChild.querySelector(".pkg-cancel").addEventListener("click", cancelBooking);
   });
+}
+
+async function cancelBooking(e) {
+  if(e.currentTarget.classList.contains("no-event")){
+    return;
+  }
+  const id = e.currentTarget.dataset.bookingid;
+  const res = await fetch(endpointPath.booking_delete(id), {
+    method: "DELETE"
+  });
+  console.log(res);
+  getYourBookings();
 }
 
 // Update package list
@@ -158,10 +174,24 @@ bookForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const bookingData = {}
   bookingData.userid = 1;
-  bookingData.packageid = bookForm.dataset.id;
-  bookingData.booking_date = (new Date()).toDateString(); 
   bookingData.departure_date =bookForm.querySelector(".pkg-dep").valueAsDate.toDateString();
   bookingData.arrival_date =bookForm.querySelector(".pkg-arr").valueAsDate.toDateString();
+
+  const isPresent = await fetch(endpointPath.booking_check, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(bookingData)
+  })
+  if(isPresent.status === 409){
+    alert("Already booked");
+    return;
+  }
+
+  bookingData.packageid = bookForm.dataset.id;
+  bookingData.booking_date = (new Date()).toDateString(); 
   bookingData.approved = 2;
 
   const data = await fetch(endpointPath.booking_post,{

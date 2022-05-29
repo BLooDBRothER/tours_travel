@@ -317,7 +317,7 @@ header .search-bar-container label:hover{
 /* your bookings */
 
 .your-bookings{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -644,6 +644,11 @@ header .search-bar-container label:hover{
 
 .none{
   display: none;
+}
+
+.no-event{
+  /* pointer-events: none; */
+  cursor: not-allowed !important;
 }
 
 /* media queries  */
