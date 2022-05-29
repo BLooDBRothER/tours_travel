@@ -197,6 +197,10 @@ header .search-bar-container label:hover{
   border-color: var(--orange);;
 }
 
+.float-form-container form .box-red{
+  border-color: red;
+}
+
 .float-form-container form #remember{
   margin:2rem 0;
 }
