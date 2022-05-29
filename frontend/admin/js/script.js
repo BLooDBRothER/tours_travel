@@ -19,6 +19,8 @@ const endpointPath = {
   pkg_delete: (pkgId) => `package/${pkgId}`,
   booking_get: (type) => `booking/${type}`,
   booking_post: (id) => `booking/${id}`,
+  message_get: `message`,
+  message_delete: (msgId) => `message/${msgId}`
 }
 
 // post form data 
@@ -53,6 +55,9 @@ navLinks.forEach((link) => {
     }
     else if(index === 2){
       getUserBooking("pending");
+    }
+    else if(index === 3){
+      getMessage();
     }
 
     const active = document.querySelector(".section.active");
@@ -209,6 +214,9 @@ const bookingStatusTemplate = (data) => {
     btn = `<div class="btn approve-btn">Approve</div>
            <div class="btn cancel-btn">Cancel</div>`
   }
+  else{
+    btn = `<div>Status: ${data.approved == 0 ? "Cancelled" : "Approved" }</div>`;
+  }
   parent.innerHTML = `
                 <div class="user-detail">
                     <h3>User Detail</h3>
@@ -257,18 +265,55 @@ bookingFilter.addEventListener("change", (e) => {
   getUserBooking(e.currentTarget.value);
 });
 
-// DOMfunction for message
-const messageLists = document.querySelectorAll(".message-list");
+// function for messages
+async function getMessage(){
+  const data = await api.get(endpointPath.message_get);
+  updateMessageList(data);
+}
 
-messageLists.forEach(list => {
-    list.addEventListener("click", (e) => {
-        document.querySelector(".selected")?.classList.remove("selected");
-        e.currentTarget.classList.add("selected");
-        const msgData = e.currentTarget.querySelectorAll(".msg-data > *");
-        const container = document.querySelectorAll(".message-content .msg-value");
-        msgData.forEach((data, index) => {
-            container[index].innerText = data.innerText;
-            // console.log(data.innerText);
-        })
-    });
-});
+const msgTemplate = (data) => {
+  const parent = document.createElement("div");
+  parent.classList.add("message-list");
+  parent.innerHTML = `
+  <i class="fas fa-times clear-msg" data-msgid=${data.msgid}></i>
+  <h4>${data.name}</h4>
+  <p>${data.subject}</p>
+  <div class="msg-data none">
+      <div class="name">${data.name}</div>
+      <div class="email">${data.email}</div>
+      <div class="phoneNo">${data.phone_num}</div>
+      <div class="subject">${data.subject}</div>
+      <div class="data">${data.message}</div>
+  </div>
+  `;
+  return parent;
+}
+
+function updateMessageList(msgData){
+  const msgContainer = document.querySelector(".message-lists");
+  msgContainer.innerHTML = '';
+  msgData.forEach(data => {
+    msgContainer.appendChild(msgTemplate(data));
+    msgContainer.lastChild.addEventListener("click", messageClickListener, false);
+    msgContainer.lastChild.querySelector(".clear-msg").addEventListener("click", clearMessage, true);
+  });
+}
+
+// DOMfunction for message
+async function clearMessage(e){
+  e.stopPropagation();
+  const msgid = e.currentTarget.dataset.msgid;
+  console.log(msgid)
+  await api.remove(endpointPath.message_delete(msgid));
+  getMessage(); 
+}
+
+function messageClickListener(e) {
+  document.querySelector(".selected")?.classList.remove("selected");
+  e.currentTarget.classList.add("selected");
+  const msgData = e.currentTarget.querySelectorAll(".msg-data > *");
+  const container = document.querySelectorAll(".message-content .msg-value");
+  msgData.forEach((data, index) => {
+      container[index].innerText = data.innerText;
+  });
+}
