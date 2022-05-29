@@ -1,4 +1,4 @@
-import {api} from "./api.js";
+import {api} from "../../api.js";
 
 const navLinks = document.querySelectorAll(".link");
 const section = document.querySelectorAll(".section");
