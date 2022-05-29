@@ -18,7 +18,7 @@ router.post("/login",(req,res)=>{
             res.status(404).json([]);
         }
         else{
-            res.json(d.row);
+            res.status(200).json(d.row);
         }
     });
 });

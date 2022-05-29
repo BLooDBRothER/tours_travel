@@ -3,6 +3,8 @@ import { user } from "./userData.js";
 
 let reg_form=document.querySelector(".sign-up");
 let login_form=document.querySelector(".login");
+const notification = document.querySelector(".notification");
+const formClose = document.querySelector("#form-close")
 
 reg_form.querySelector("#reg-email").addEventListener("change",async(e)=>{
     const value=e.target.value;
@@ -43,6 +45,11 @@ reg_form.addEventListener("submit",async (e)=>{
     reg_form.reset();
     let d=await api.post_json("user",JSON.stringify(data));
     console.log(d);
+    notification.innerText = "Success";
+    notification.classList.remove("none");
+    setTimeout(() => {notification.classList.add("none")}, 5000);
+    formClose.click();
+    console.log(d);
 });
 
 login_form.addEventListener("submit",async (e)=>{
@@ -54,7 +61,9 @@ login_form.addEventListener("submit",async (e)=>{
     console.log(d);
     login_form.reset();
     if(d.length===0){
-        alert("Wrong Credentials");
+        notification.innerText = "Wrong Credentials";
+        notification.classList.remove("none");
+        setTimeout(() => {notification.classList.add("none")}, 5000);
     }
     else{
         d=d[0];
@@ -67,6 +76,10 @@ login_form.addEventListener("submit",async (e)=>{
         msgForm.querySelector(".msg-email").value=d.email;
         document.querySelector("#login-btn").classList.add("none");
         document.querySelector("#logout-btn").classList.remove("none");
+        formClose.click();
+        notification.innerText = "Success";
+        notification.classList.remove("none");
+        setTimeout(() => {notification.classList.add("none")}, 5000);
     }
 });
 

@@ -92,13 +92,14 @@ const pkgTemplate = (data) => {
   parent.innerHTML =`<img src=${endpointPath.img_get(data.image)} alt="loacation">
                   <div class="content">
                       <h3> <i class="fas fa-map-marker-alt"></i> ${data.place} </h3>
-                      <p class="pkg-des">${data.description}</p>
+                      <p class="pkg-des"></p>
                       <div class="price"> Rs. ${data.price} </div>
                       <div class="edit-option" data-id=${data.id} data-name=${data.place} data-price=${data.price} data-img=${data.image}>
                           <span class="btn book-btn">Edit Package</span>
                           <span class="fa fa-trash delete"></span>
-                  </div>`
-  return parent
+                  </div>`;
+  parent.querySelector(".pkg-des").innerText = data.description;
+  return parent;
 }
 
 function DOMUpdateListPackage(jsonData){
@@ -114,7 +115,7 @@ function DOMUpdateListPackage(jsonData){
 
 async function removePackage(e){
   const id = e.currentTarget.parentElement.dataset.id;
-  const imgName = e.currentTarget.parentElement.dataset.image;
+  const imgName = e.currentTarget.parentElement.dataset.img;
   const status = await api.remove(endpointPath.pkg_delete(id));
   if(status){
     await api.remove(endpointPath.img_delete(imgName));

@@ -8,7 +8,9 @@ const fs=require('fs');
 //uploadLogic
 const storage=multer.diskStorage({
   destination:(req,file,cb)=>{
+    console.log("hel");
     cb(null,'./uploads');
+    console.log("hel");
   },
   filename:(req,file,cb)=>{
     console.log(file.fieldname);
@@ -20,6 +22,7 @@ const upload=multer({storage:storage});
 
 //routes
 router.post("/", upload.single("image"), function (req, res) {
+  console.log("hel");
   res.json({
     "status":"Posted successfully",
     image_url:`${req.file.filename}`

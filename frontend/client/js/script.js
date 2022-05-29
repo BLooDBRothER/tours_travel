@@ -89,6 +89,9 @@ const endpointPath = {
   msg_post: `${url}/message`
 }
 
+const reload = document.querySelector(".reload");
+reload.addEventListener("click", getYourBookings);
+
 bookingsOpen.addEventListener("click", (e) => {
   e.preventDefault();
   if(!user.returnAllData().isLogin){
@@ -174,10 +177,11 @@ const packageTemplate = (id,name,price,des,imgurl) => {
     parent.innerHTML = `<img src="${url}/photos/${imgurl}" alt="">
     <div class="content">
         <h3> <i class="fas fa-map-marker-alt"></i> ${name} </h3>
-        <p>${des}</p>
+        <p></p>
         <div class="price"> Rs.${price} </div>
         <span class="btn book-btn" data-pkgid=${id} data-name=${name} data-price=${price}>book now</span>
     </div>`
+    parent.querySelector("p").innerText = des;
     return parent;
 };
 
@@ -208,6 +212,7 @@ function updatePackage(data){
 }
 
 // function to book package
+const closeBook = document.querySelector(".book-pkg-close");
 const bookForm = document.querySelector(".book-package");
 bookForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -241,7 +246,7 @@ bookForm.addEventListener("submit", async (e) => {
     },
     body: JSON.stringify(bookingData)
   });
-
+  closeBook.click();
   console.log(data);
 });
 
