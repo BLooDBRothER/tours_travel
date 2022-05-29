@@ -253,7 +253,7 @@ msgForm.addEventListener("submit", async (e) => {
   console.log("ehl")
   e.preventDefault();
   const messageData = {};
-  messageData.userid = 1;
+  messageData.userid = user.returnAllData().id;
   messageData.message = msgForm.querySelector(".msg-content").value;
   messageData.subject = msgForm.querySelector(".msg-subject").value;
 
