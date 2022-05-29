@@ -17,6 +17,8 @@ const endpointPath = {
   pkg_id_get: (pkgId) => `package/${pkgId}`,
   pkg_update: (pkgId) => `package/${pkgId}`,
   pkg_delete: (pkgId) => `package/${pkgId}`,
+  booking_get: (type) => `booking/${type}`,
+  booking_post: (id) => `booking/${id}`,
 }
 
 // post form data 
@@ -46,8 +48,11 @@ navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
     const index = +e.target.dataset.index;
 
-    if(index == 1){
+    if(index === 1){
       updateListPackage();
+    }
+    else if(index === 2){
+      getUserBooking("pending");
     }
 
     const active = document.querySelector(".section.active");
@@ -192,6 +197,65 @@ async function updatePkg(){
   updateListPackage();
   closeForm.click();
 }
+
+// user bookings
+const bookingStatusTemplate = (data) => {
+  const parent = document.createElement("div");
+  parent.classList.add("booking");
+  parent.dataset.id = data.bookingid;
+  console.log(data);
+  var btn = '';
+  if(data.approved === 2){
+    btn = `<div class="btn approve-btn">Approve</div>
+           <div class="btn cancel-btn">Cancel</div>`
+  }
+  parent.innerHTML = `
+                <div class="user-detail">
+                    <h3>User Detail</h3>
+                    <div class="user-name">Name: <span>${data.name}</span></div>
+                    <div class="user-email">E-mail: <span>${data.email}</span></div>
+                    <div class="user-mobile">Mobile: <span>${data.phone_num}</span></div>
+                    <div class="user-dep-date">Departure Date: <span>${data.departure_date}</span></div>
+                    <div class="user-arr-date">Arrival Date: <span>${data.arrival_date}</span></div>
+                </div>
+                <div class="pkg-detail">
+                    <h3>Package Detail</h3>
+                    <div class="pkg-id">Package id: <span>${data.pkgid}</span></div>
+                    <div class="pkg-name">Package Name: <span>${data.place}</span></div>
+                </div>
+                ${btn}`
+  return parent;
+}
+
+async function getUserBooking(type){
+  const data = await api.get(endpointPath.booking_get(type));
+  console.log(data);
+  updateUserBooking(data);
+}
+
+function updateUserBooking(bookingData){
+  const bookingCnt = document.querySelector(".bookings-container");
+  bookingCnt.innerHTML = '';
+  bookingData.forEach(data => {
+    bookingCnt.appendChild(bookingStatusTemplate(data));
+    bookingCnt.lastChild.querySelectorAll(".btn")?.forEach(btn => {
+      btn.addEventListener("click", updateBookingStatus);
+    });
+  });
+}
+
+async function updateBookingStatus(e){
+  const id = e.currentTarget.parentElement.dataset.id;
+  const approveStatus = e.currentTarget.classList.contains("approve-btn") ? 1 : 0;
+  await api.update(endpointPath.booking_post(id), JSON.stringify({approved: approveStatus}));
+  getUserBooking("pending");
+}
+
+// DOM FUNCTION FOR BOOKING FILTER
+const bookingFilter = document.querySelector("#pkg-filter");
+bookingFilter.addEventListener("change", (e) => {
+  getUserBooking(e.currentTarget.value);
+});
 
 // DOMfunction for message
 const messageLists = document.querySelectorAll(".message-list");
