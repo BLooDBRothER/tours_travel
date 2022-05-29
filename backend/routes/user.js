@@ -3,15 +3,16 @@ const db = require("../modules/dbQuery");
 const router=express.Router();
 
 //getAll
-router.get("/",(req,res)=>{
+router.get("/all",(req,res)=>{
     db.query("SELECT * FROM USER",(d)=>{
         res.json(d.row)
     });
 })
 
-//getOne
-router.get("/:id",(req,res)=>{
-    db.query(`SELECT * FROM USER WHERE id=${req.params.id}`,(d)=>{
+//getOneByCredential
+router.post("/login",(req,res)=>{
+    const data=req.body;
+    db.query(`SELECT * FROM USER WHERE email="${data.email}" and password="${data.password}"`,(d)=>{
         if(d.row.length===0){
             console.log("Entering here");
             res.status(404).json([]);
@@ -20,28 +21,43 @@ router.get("/:id",(req,res)=>{
             res.json(d.row);
         }
     });
-})
+});
 
+//getEmail
+router.post("/isreg",(req,res)=>{
+    db.query(`SELECT * FROM USER WHERE email="${req.body.email}"`,(d)=>{
+        console.log(d);
+        if(d.row.length===0){
+            console.log("Entering here");
+            res.json({"status":false});
+        }
+        else{
+            res.json({"status":true});
+        }
+    });
+});
 //createOne
+/*
+{
+    "email":varchar,
+    "password":varchar,
+    "name":varchar,
+    "phone_num":int,
+    "pincode":int,
+    "area":varchar
+}
+*/
 router.post("/",(req,res)=>{
-    console.log(req.body);
-    res.json({
-        type:`Posting done`
-    })
+    const data=req.body;
+    db.query(
+        `INSERT INTO user (email,password,name,phone_num,pincode,area) values ("${data.email}","${data.password}","${data.name}",${data.phone_num},${data.pincode},"${data.area}")`,
+        (d) => {
+          console.log(d);
+          res.json(d);
+        }
+    );
 })
 
-//updateOne
-router.patch("/:id",(req,res)=>{
-    res.json({
-        type:`Updating done`
-    })
-})
 
-//deletingOne
-router.delete("/:id",(req,res)=>{
-    res.json({
-        type:`Deleting done`
-    })
-})
 
 module.exports=router;
