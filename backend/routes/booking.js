@@ -10,9 +10,9 @@ router.get("/",(req,res)=>{
     });
 })
 
-//getOne
+//get By User ID
 router.get("/:id",(req,res)=>{
-    db.query(`SELECT * FROM BOOKING WHERE id=${req.params.id}`,(d)=>{
+    db.query(`SELECT place, BOOKING.id as bookingid, PACKAGE.id as packageid, departure_date, arrival_date, approved FROM BOOKING INNER JOIN PACKAGE ON PACKAGE.ID = BOOKING.PACKAGEID WHERE userid=${req.params.id}`,(d)=>{
         if(d.row.length===0){
             console.log("Entering here");
             res.status(404).json([]);
@@ -21,6 +21,20 @@ router.get("/:id",(req,res)=>{
             res.json(d.row);
         }
     });
+})
+
+//Check already booked
+router.post("/check", (req, res) => {
+    const data = req.body;
+    console.log(data);
+    db.query(`SELECT * FROM BOOKING WHERE userid=${data.userid} AND departure_date='${data.departure_date}' AND arrival_date='${data.arrival_date}'`, (d) => {
+        if(d.row.length === 0){
+            res.status(200).json([]);
+        }
+        else{
+            res.status(409).json([]);
+        }
+    })
 })
 
 //createOne
