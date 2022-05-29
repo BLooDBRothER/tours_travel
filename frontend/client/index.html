@@ -418,88 +418,6 @@
 
 <!-- gallery section ends -->
 
-<!-- review section starts  -->
-
-<!-- <section class="review" id="review">
-
-    <h1 class="heading">
-        <span>r</span>
-        <span>e</span>
-        <span>v</span>
-        <span>i</span>
-        <span>e</span>
-        <span>w</span>
-    </h1>
-
-    <div class="swiper-container review-slider">
-
-        <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-                <div class="box">
-                    <img src="images/pic1.png" alt="">
-                    <h3>john deo</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa adipisci quisquam sunt nesciunt fugiat odit minus illum asperiores dolorum enim sint quod ipsam distinctio molestias consectetur ducimus beatae, reprehenderit exercitationem!</p>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="box">
-                    <img src="images/pic2.png" alt="">
-                    <h3>john deo</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa adipisci quisquam sunt nesciunt fugiat odit minus illum asperiores dolorum enim sint quod ipsam distinctio molestias consectetur ducimus beatae, reprehenderit exercitationem!</p>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="box">
-                    <img src="images/pic3.png" alt="">
-                    <h3>john deo</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa adipisci quisquam sunt nesciunt fugiat odit minus illum asperiores dolorum enim sint quod ipsam distinctio molestias consectetur ducimus beatae, reprehenderit exercitationem!</p>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="swiper-slide">
-                <div class="box">
-                    <img src="images/pic4.png" alt="">
-                    <h3>john deo</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa adipisci quisquam sunt nesciunt fugiat odit minus illum asperiores dolorum enim sint quod ipsam distinctio molestias consectetur ducimus beatae, reprehenderit exercitationem!</p>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</section> -->
-
-<!-- review section ends -->
-
 <!-- contact section starts  -->
 
 <section class="contact" id="contact">
@@ -520,17 +438,17 @@
             <img src="images/contact-img.svg" alt="">
         </div>
 
-        <form action="">
+        <form action="" class="msg-form">
             <div class="inputBox">
-                <input type="text" placeholder="name">
-                <input type="email" placeholder="email">
+                <input type="text" placeholder="name" readonly>
+                <input type="email" placeholder="email" readonly>
             </div>
             <div class="inputBox">
-                <input type="number" placeholder="number">
-                <input type="text" placeholder="subject">
+                <input type="number" placeholder="number" readonly>
+                <input type="text" class="msg-subject" placeholder="subject" required>
             </div>
-            <textarea placeholder="message" name="" id="" cols="30" rows="10"></textarea>
-            <input type="submit" class="btn" value="send message">
+            <textarea placeholder="message" class="msg-content" name="content" cols="30" rows="10" required></textarea>
+            <input type="submit" class="btn msg-btn" value="send message">
         </form>
 
     </div>

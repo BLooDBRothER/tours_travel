@@ -322,6 +322,7 @@ header h2 span {
   font-size: 1.3rem;
   margin: .3rem 0;
   transition: none;
+  cursor: pointer;
 }
 
 .message-list > *{

@@ -73,6 +73,7 @@ const endpointPath = {
   booking_id_get: (userid) => `${url}/booking/${userid}`,
   booking_check: `${url}/booking/check`,
   booking_delete: (id) => `${url}/booking/${id}`,
+  msg_post: `${url}/message`
 }
 
 bookingsOpen.addEventListener("click", (e) => {
@@ -205,6 +206,34 @@ bookForm.addEventListener("submit", async (e) => {
 
   console.log(data);
 });
+
+// function to send contact message
+const msgBtn = document.querySelector(".msg-btn");
+const msgForm = document.querySelector(".msg-form");
+
+msgForm.addEventListener("submit", async (e) => {
+  console.log("ehl")
+  e.preventDefault();
+  const messageData = {};
+  messageData.userid = 1;
+  messageData.message = msgForm.querySelector(".msg-content").value;
+  messageData.subject = msgForm.querySelector(".msg-subject").value;
+
+  const res = await fetch(endpointPath.msg_post, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    mode: "cors",
+    body: JSON.stringify(messageData)
+  });
+
+  if(res.status === 200){
+    alert("Message Sent");
+    msgForm.querySelector(".msg-content").value = '';
+    msgForm.querySelector(".msg-subject").value = '';
+  }
+})
 
 window.onload = () => {
   getPackage();
