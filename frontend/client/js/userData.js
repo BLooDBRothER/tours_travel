@@ -23,6 +23,10 @@ function User(){
         floatForm[1].querySelector(".name").value="";
         floatForm[1].querySelector(".mobile").value="";
         floatForm[1].querySelector(".email").value="";
+        let msgForm=document.querySelector(".msg-form");
+        msgForm.querySelector(".msg-name").value="";
+        msgForm.querySelector(".msg-number").value="";
+        msgForm.querySelector(".msg-email").value="";
     }
     function setData(mail,nam,pass,ide,pin,are,ph_num){
         email=mail;
