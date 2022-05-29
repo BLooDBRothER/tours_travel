@@ -61,6 +61,10 @@ login_form.addEventListener("submit",async (e)=>{
         user.setLogin(true);
         user.setData(d.email,d.name,d.password,d.id,d.pincode,d.area,d.phone_num);
         user.printAllData();
+        let msgForm=document.querySelector(".msg-form");
+        msgForm.querySelector(".msg-name").value=d.name;
+        msgForm.querySelector(".msg-number").value=d.phone_num;
+        msgForm.querySelector(".msg-email").value=d.email;
         document.querySelector("#login-btn").classList.add("none");
         document.querySelector("#logout-btn").classList.remove("none");
     }
