@@ -36,6 +36,7 @@
     <div class="icons">
         <i class="fas fa-search" id="search-btn"></i>
         <i class="fas fa-user" id="login-btn"></i>
+        <i class="fas fa-sign-out-alt none" id="logout-btn"></i>
     </div>
 
     <form action="" class="search-bar-container">
@@ -77,22 +78,21 @@
 
     <form action="" class="login">
         <h3>login</h3>
-        <input type="email" class="box" placeholder="enter your email">
-        <input type="password" class="box" placeholder="enter your password">
+        <input type="email" class="box" required id="email" placeholder="enter your email">
+        <input type="password" class="box" id="password" placeholder="enter your password">
         <input type="submit" value="login now" class="btn">
-        <input type="checkbox" id="remember">
-        <label for="remember">remember me</label>
-        <p>forget password? <a href="#">click here</a></p>
         <p>Don't have an account? <span class="change-link" data-value="login">Register now</span></p>
     </form class="form-change-btn">
     <form action="" class="sign-up none">
         <h3>Sign Up</h3>
-        <input type="text" class="box" placeholder="enter your name">
-        <input type="number" class="box" placeholder="enter your mobile">
-        <input type="email" class="box" placeholder="enter your email">
-        <input type="password" class="box" placeholder="enter your password">
-        <input type="password" class="box" placeholder="re-enter your password">
-        <input type="submit" value="login now" class="btn">
+        <input type="text" class="box" required id="name"  placeholder="enter your name">
+        <input type="number" class="box" required id="mobile" placeholder="enter your mobile">
+        <input type="email" class="box" required id="reg-email" placeholder="enter your email">
+        <input type="password" class="box" required id="reg-password" placeholder="enter your password">
+        <input type="password" class="box" required id="reg-re-password" placeholder="re-enter your password">
+        <input type="number" class="box" required id="pincode" placeholder="enter your pincode">
+        <input type="text" class="box" required id="area" placeholder="enter your area">
+        <input type="submit" value="register now" class="btn">
         <p>Click here to <span class="change-link" data-value="sign-up">Login now</span></p>
     </form>
 
@@ -131,9 +131,9 @@
 
     <form action="" class="book-package">
         <h3>Book Your Package</h3>
-        <input type="text" class="box" name="name" placeholder="enter your name" readonly>
-        <input type="number" class="box " name="phone" placeholder="enter your mobile" readonly>
-        <input type="email" class="box" name="email" placeholder="enter your email" readonly>
+        <input type="text" class="box name" name="name" placeholder="enter your name" readonly>
+        <input type="number" class="box mobile" name="phone" placeholder="enter your mobile" readonly>
+        <input type="email" class="box email" name="email" placeholder="enter your email" readonly>
         <input type="text" readonly class="box pkg-name" name="pkgname" >
         <input type="number" readonly class="box pkg-price">
         <label for="dep-date">Departure Date</label>
@@ -594,7 +594,8 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <!-- custom js file link  -->
-<script src="./js/script.js"></script>
+<script src="./js/script.js" type="module"></script>
 <script src="./js/db.js"></script>
+<script src="./js/auth.js" type="module"></script>
 </body>
 </html>
