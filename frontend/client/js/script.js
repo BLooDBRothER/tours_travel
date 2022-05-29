@@ -1,3 +1,5 @@
+import { user } from "./userData.js";
+
 const searchBtn = document.querySelector('#search-btn');
 const searchBar = document.querySelector('.search-bar-container');
 const formBtn = document.querySelector('#login-btn');
@@ -63,7 +65,17 @@ function updateBookForm(packageData) {
   floatForm[1].querySelector("form").dataset.id = packageData.pkgid;
   floatForm[1].querySelector(".pkg-name").value = packageData.name;
   floatForm[1].querySelector(".pkg-price").value = packageData.price;
+  let data=user.returnAllData();
+  console.log({
+    "name":data.name,
+    "phone":data.phone_num,
+    "email":data.email
+  });
+  floatForm[1].querySelector(".name").value=data.name;
+  floatForm[1].querySelector(".mobile").value=data.phone_num;
+  floatForm[1].querySelector(".email").value=data.email;
 }
+
 
 // your bookings
 const url = "http://localhost:3000";
@@ -77,6 +89,10 @@ const endpointPath = {
 
 bookingsOpen.addEventListener("click", (e) => {
   e.preventDefault();
+  if(!user.returnAllData().isLogin){
+    formBtn.click();
+    return;
+  }
   yourBookings.classList.remove("none");
   getYourBookings();
 });
@@ -86,7 +102,7 @@ bookingsClose.addEventListener("click", () => {
 });
 
 async function getYourBookings(){
-  const res = await fetch(endpointPath.booking_id_get(1));
+  const res = await fetch(endpointPath.booking_id_get(user.returnAllData().id));
   const data = await res.json();
   console.log(data);
   updateYourBookings(data);
@@ -162,6 +178,11 @@ function updatePackage(data){
     data.forEach(d => {
       container.appendChild(packageTemplate(d.id,d.place,d.price,d.description,d.image));
       container.lastChild.querySelector(".book-btn").addEventListener("click", (e) => {
+        console.log(user.returnAllData().isLogin);
+        if(!user.returnAllData().isLogin){
+          formBtn.click();
+          return;
+        }
         floatForm[1].classList.add("active");
         updateBookForm(e.target.dataset);
       })
@@ -173,7 +194,7 @@ const bookForm = document.querySelector(".book-package");
 bookForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const bookingData = {}
-  bookingData.userid = 1;
+  bookingData.userid = user.returnAllData().id;
   bookingData.departure_date =bookForm.querySelector(".pkg-dep").valueAsDate.toDateString();
   bookingData.arrival_date =bookForm.querySelector(".pkg-arr").valueAsDate.toDateString();
 
