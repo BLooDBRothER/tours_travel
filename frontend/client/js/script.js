@@ -69,6 +69,7 @@ function updateBookForm(packageData) {
 const url = "http://localhost:3000";
 const endpointPath = {
   pkg_get: `${url}/package`,
+  pkg_name_get: (pkgName) => `${url}/package/name/${pkgName}`,
   booking_post: `${url}/booking`,
   booking_id_get: (userid) => `${url}/booking/${userid}`,
   booking_check: `${url}/booking/check`,
@@ -132,6 +133,22 @@ async function cancelBooking(e) {
   console.log(res);
   getYourBookings();
 }
+
+// search package
+const searchForm = document.querySelector(".search-form");
+searchForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const value = searchForm.querySelector("#search-bar").value;
+  if(value === ""){
+    getPackage();
+    return;
+  }
+  const res = await fetch(endpointPath.pkg_name_get(value), {
+    method: 'GET'
+  });
+  const data = await res.json();
+  updatePackage(data);
+})
 
 // Update package list
 
