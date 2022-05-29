@@ -3,8 +3,15 @@ const db = require("../modules/dbQuery");
 const router=express.Router();
 
 //getAll
-router.get("/",(req,res)=>{
-    db.query("SELECT * FROM BOOKING INNER JOIN PACKAGE ON BOOKING.PACKAGEID = PACKAGE.ID INNER JOIN USER ON booking.USERID = USER.ID",(d)=>{
+router.get("/pending",(req,res)=>{
+    db.query("SELECT BOOKING.ID AS bookingid, PACKAGE.ID AS pkgid, name, email, departure_date, arrival_date, phone_num, place, approved FROM BOOKING INNER JOIN PACKAGE ON BOOKING.PACKAGEID = PACKAGE.ID INNER JOIN USER ON booking.USERID = USER.ID WHERE approved=2",(d)=>{
+        console.log(d.row)
+        res.json(d.row)
+    });
+})
+
+router.get("/approve",(req,res)=>{
+    db.query("SELECT BOOKING.ID AS bookingid, PACKAGE.ID AS pkgid, name, email, departure_date, arrival_date, phone_num, place, approved FROM BOOKING INNER JOIN PACKAGE ON BOOKING.PACKAGEID = PACKAGE.ID INNER JOIN USER ON booking.USERID = USER.ID WHERE approved!=2",(d)=>{
         console.log(d.row)
         res.json(d.row)
     });
@@ -68,7 +75,7 @@ router.post("/",(req,res)=>{
 */
 router.patch("/:id",(req,res)=>{
     db.query(
-        `UPDATE booking SET approved=${req.body.approved}`,
+        `UPDATE booking SET approved=${req.body.approved} WHERE id=${req.params.id}`,
         (d)=>{
             console.log(d);
             res.json(d);
