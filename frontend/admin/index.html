@@ -30,10 +30,10 @@
     <section class="section add-pkg-container active">
         <h2 class="section-title">Add Package</h2>
         <form action="" class="add-pkg">
-            <input type="text" class="add-pkg-input add-pkg-name" placeholder="Enter package Name">
-            <input type="text" class="add-pkg-input add-pkg-price" placeholder="Enter package Price">
-            <textarea name="description" placeholder="Enter package Description" class="add-pkg-input add-pkg-des" cols="30" rows="3"></textarea>
-            <input type="file" name="file" class="add-pkg-input add-pkg-img">
+            <input type="text" class="add-pkg-input add-pkg-name" placeholder="Enter package Name" required>
+            <input type="text" class="add-pkg-input add-pkg-price" placeholder="Enter package Price" required>
+            <textarea name="description" placeholder="Enter package Description" class="add-pkg-input add-pkg-des" cols="30" rows="3" required></textarea>
+            <input type="file" name="file" class="add-pkg-input add-pkg-img" required>
             <button class="add-pkg-btn btn">Add Package</button>
         </form>
     </section>
@@ -42,9 +42,9 @@
         <i class="fas fa-times close-form"></i>
         <h2 class="section-title">Update Package</h2>
         <form action="" class="update-pkg">
-            <input type="text" class="update-pkg-input update-pkg-name" placeholder="Enter package Name">
-            <input type="text" class="update-pkg-input update-pkg-price" placeholder="Enter package Price">
-            <textarea name="description" placeholder="Enter package Description" class="update-pkg-input update-pkg-des" cols="30" rows="3"></textarea>
+            <input type="text" class="update-pkg-input update-pkg-name" placeholder="Enter package Name" required>
+            <input type="text" class="update-pkg-input update-pkg-price" placeholder="Enter package Price" required>
+            <textarea name="description" placeholder="Enter package Description" class="update-pkg-input update-pkg-des" cols="30" rows="3" required></textarea>
             <input type="file" name="file" class="update-pkg-input update-pkg-img">
             <p class="note">* Upload image to change the image</p>
             <button class="update-pkg-btn btn">Update Package</button>

@@ -272,11 +272,18 @@ msgForm.addEventListener("submit", async (e) => {
   });
 
   if(res.status === 200){
-    alert("Message Sent");
+    showNotificatio("Message Sent");
     msgForm.querySelector(".msg-content").value = '';
     msgForm.querySelector(".msg-subject").value = '';
   }
 })
+
+function showNotificatio(message){
+  const notification = document.querySelector(".notification");
+  notification.innerText = message;
+  notification.classList.remove("none");
+  setTimeout(() => {notification.classList.add("none")}, 5000);
+}
 
 window.onload = () => {
   getPackage();

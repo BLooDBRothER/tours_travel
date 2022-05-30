@@ -64,7 +64,7 @@ navLinks.forEach((link) => {
 
     const selectedBtn = document.querySelector(".selected");
 
-    selectedBtn.classList.remove("selected");
+    selectedBtn?.classList.remove("selected");
     e.target.classList.add("selected");
     
     active.classList.add("none");
@@ -307,6 +307,7 @@ async function clearMessage(e){
   console.log(msgid)
   await api.remove(endpointPath.message_delete(msgid));
   getMessage(); 
+  clearMessageView();
 }
 
 function messageClickListener(e) {
@@ -316,5 +317,12 @@ function messageClickListener(e) {
   const container = document.querySelectorAll(".message-content .msg-value");
   msgData.forEach((data, index) => {
       container[index].innerText = data.innerText;
+  });
+}
+
+function clearMessageView(){
+  const container = document.querySelectorAll(".message-content .msg-value");
+  container.forEach(cnt => {
+    cnt.innerText = '';
   });
 }
