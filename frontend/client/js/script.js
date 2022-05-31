@@ -154,9 +154,11 @@ async function cancelBooking(e) {
 }
 
 // search package
+const searchKey = document.querySelector(".search-pkg");
 const searchForm = document.querySelector(".search-form");
-searchForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+
+async function searchPackage(){
+  console.log("hel")
   const value = searchForm.querySelector("#search-bar").value;
   if(value === ""){
     getPackage();
@@ -167,6 +169,13 @@ searchForm.addEventListener("submit", async (e) => {
   });
   const data = await res.json();
   updatePackage(data);
+}
+
+searchKey.addEventListener("click", searchPackage);
+
+searchForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  searchPackage();
 })
 
 // Update package list
